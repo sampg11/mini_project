@@ -378,7 +378,7 @@
 
             <div class="info">
                 <h3>
-                    by
+                    by :
                     {% for author in book.authors.all %}
                         {{ author.first_name }} {{ author.last_name }}{% if not forloop.last %}, {% endif %}
                     {% empty %}
