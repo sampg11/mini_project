@@ -72,27 +72,39 @@ class BookSearchView(LoginRequiredMixin, generic.ListView):
     model = Book
     template_name = 'home/book_search.html'
     context_object_name = 'books'
-    paginate_by = 10
-
+    paginate_by = 12
 
     def get_queryset(self):
-        from django.db.models import Exists, OuterRef
         query = self.request.GET.get('q', '').strip()
+        genre = self.request.GET.get('genre', '').strip()
         user = self.request.user
+
         fav_subquery = Book.favorited_by.through.objects.filter(
             book_id=OuterRef('pk'), user_id=user.pk
         )
         queryset = Book.objects.all().prefetch_related('authors').annotate(is_favorited=Exists(fav_subquery))
+
+
+        if genre:
+            queryset = queryset.filter(genre__iexact=genre)
+
+
         if query:
             queryset = queryset.filter(
-                Q(title__icontains=query) | Q(authors__first_name__icontains=query)|
-                Q(authors__last_name__icontains=query)).distinct()
+                Q(title__icontains=query) |
+                Q(authors__first_name__icontains=query) |
+                Q(authors__last_name__icontains=query)
+            ).distinct()
+
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['query'] = self.request.GET.get('q', '')
+        context['selected_genre'] = self.request.GET.get('genre', '')
         return context
+
+
 class FavoriteListView(LoginRequiredMixin, generic.ListView):
     model = Book
     template_name = 'home/favorites.html'

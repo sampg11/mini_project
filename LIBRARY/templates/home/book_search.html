@@ -64,6 +64,56 @@
         font-size: 16px;
     }
 
+    /* --- استایل بخش ژانرها (۳تایی در هر سطر) --- */
+    .genres-wrapper {
+        margin-bottom: 35px;
+    }
+
+    .genres-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    .genre-card {
+        background: var(--card);
+        border: 1px solid var(--card-border);
+        border-radius: 14px;
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        text-decoration: none;
+        color: var(--text-main);
+        font-weight: 600;
+        font-size: 15px;
+        transition: all 0.25s ease;
+        cursor: pointer;
+    }
+
+    .genre-card:hover {
+        border-color: var(--primary);
+        background: rgba(167, 139, 250, 0.08);
+        transform: translateY(-2px);
+    }
+
+    .genre-card.active {
+        border-color: var(--primary);
+        background: rgba(167, 139, 250, 0.18);
+        box-shadow: 0 0 15px rgba(167, 139, 250, 0.2);
+    }
+
+    .genre-icon {
+        font-size: 20px;
+    }
+
+    @media(max-width: 768px) {
+        .genres-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
     /* کادر جستجو */
     .search-box {
         position: relative;
@@ -353,7 +403,44 @@
     <p class="subtitle">Search books by title or author's name.</p>
 </div>
 
+<!-- بخش ژانرها (نمایش ۳تایی زیر هم) -->
+<div class="genres-wrapper">
+    <div class="genres-grid">
+        <a href="?{% if query %}q={{ query }}{% endif %}" class="genre-card {% if not selected_genre %}active{% endif %}">
+            <span class="genre-icon">📚</span>
+            <span>All Genres</span>
+        </a>
+        <a href="?genre=Self Growth{% if query %}&q={{ query }}{% endif %}" class="genre-card {% if selected_genre == 'Self Growth' %}active{% endif %}">
+            <span class="genre-icon">🧠</span>
+            <span>Self Growth</span>
+        </a>
+        <a href="?genre=Science{% if query %}&q={{ query }}{% endif %}" class="genre-card {% if selected_genre == 'Science' %}active{% endif %}">
+            <span class="genre-icon">🔬</span>
+            <span>Science</span>
+        </a>
+        <a href="?genre=Technology{% if query %}&q={{ query }}{% endif %}" class="genre-card {% if selected_genre == 'Technology' %}active{% endif %}">
+            <span class="genre-icon">💻</span>
+            <span>Technology</span>
+        </a>
+        <a href="?genre=Romance{% if query %}&q={{ query }}{% endif %}" class="genre-card {% if selected_genre == 'Romance' %}active{% endif %}">
+            <span class="genre-icon">❤️</span>
+            <span>Romance</span>
+        </a>
+        <a href="?genre=Mystery{% if query %}&q={{ query }}{% endif %}" class="genre-card {% if selected_genre == 'Mystery' %}active{% endif %}">
+            <span class="genre-icon">🕵️</span>
+            <span>Mystery</span>
+        </a>
+        <a href="?genre=Fantasy{% if query %}&q={{ query }}{% endif %}" class="genre-card {% if selected_genre == 'Fantasy' %}active{% endif %}">
+            <span class="genre-icon">🚀</span>
+            <span>Fantasy</span>
+        </a>
+    </div>
+</div>
+
 <form method="get" action="">
+    {% if selected_genre %}
+        <input type="hidden" name="genre" value="{{ selected_genre }}">
+    {% endif %}
     <div class="search-box">
         <span class="search-icon">🔍</span>
         <input
@@ -407,8 +494,8 @@
         </div>
     {% empty %}
         <div class="no-results">
-            {% if query %}
-                No books found matching "{{ query }}".
+            {% if query or selected_genre %}
+                No books found matching your filter criteria.
             {% else %}
                 No books available.
             {% endif %}
@@ -419,13 +506,13 @@
 {% if is_paginated %}
     <div class="pagination">
         {% if page_obj.has_previous %}
-            <a href="?q={{ query }}&page={{ page_obj.previous_page_number }}">Previous</a>
+            <a href="?{% if selected_genre %}genre={{ selected_genre }}&{% endif %}{% if query %}q={{ query }}&{% endif %}page={{ page_obj.previous_page_number }}">Previous</a>
         {% endif %}
 
         <span class="current">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
 
         {% if page_obj.has_next %}
-            <a href="?q={{ query }}&page={{ page_obj.next_page_number }}">Next</a>
+            <a href="?{% if selected_genre %}genre={{ selected_genre }}&{% endif %}{% if query %}q={{ query }}&{% endif %}page={{ page_obj.next_page_number }}">Next</a>
         {% endif %}
     </div>
 {% endif %}
