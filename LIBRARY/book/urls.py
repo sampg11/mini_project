@@ -3,7 +3,7 @@ from django.contrib.auth.views import LoginView
 from django.urls import path
 
 from book.views import homepage, RegisterPageView, BookCreateView, welcom_view, BookListView, BookSearchView, \
-    BookDetailView, BookUpdateView, BookDeleteView
+    BookDetailView, BookUpdateView, BookDeleteView, toggle_favorite, FavoriteListView
 
 urlpatterns = [
     path('', homepage, name='homepage'),
@@ -12,7 +12,9 @@ urlpatterns = [
     path('login/', LoginView.as_view(template_name="home/login.html"), name='login'),
     path('books/add/', BookCreateView.as_view(), name='book-add'),
     path('books/search/', BookSearchView.as_view(), name='book_search'),
+    path('books/favorites/', FavoriteListView.as_view(), name='favorites'),
     path('books/<int:pk>/edit/', BookUpdateView.as_view(), name='book-edit'),
+    path('books/<int:pk>/favorite/', toggle_favorite, name='toggle_favorite'),
     path('books/<int:pk>/delete/', BookDeleteView.as_view(), name='book-delete'),
     path('books/<int:pk>/', BookDetailView.as_view(), name='book_detail'),
     path('books/', BookListView.as_view(), name='book_list'),

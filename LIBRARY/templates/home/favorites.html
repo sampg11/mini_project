@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bookora | Favorites</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+:root{
+
+    --bg:#09090f;
+    --card:#11111a;
+    --text:#f7f4ef;
+    --muted:#9696a8;
+    --primary:#a78bfa;
+    --purple:#7c3aed;
+    --border:rgba(255,255,255,.08);
+
+}
+
+
+
+body{
+
+    min-height:100vh;
+
+    background:
+    radial-gradient(circle at 10% 10%,rgba(124,58,237,.18),transparent 30%),
+    radial-gradient(circle at 90% 20%,rgba(167,139,250,.12),transparent 25%),
+    var(--bg);
+
+    color:var(--text);
+
+    font-family:"DM Sans",sans-serif;
+
+    padding:50px 7%;
+
+}
+
+
+
+
+.nav{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:70px;
+
+}
+
+
+
+.logo{
+
+    font-size:28px;
+
+    font-weight:800;
+
+}
+
+
+.logo span{
+
+    color:var(--primary);
+
+}
+
+
+
+.home-btn{
+
+    text-decoration:none;
+
+    color:white;
+
+    padding:12px 20px;
+
+    border-radius:12px;
+
+    background:
+    linear-gradient(
+        135deg,
+        var(--primary),
+        var(--purple)
+    );
+
+}
+
+
+
+.hero{
+
+    margin-bottom:50px;
+
+}
+
+
+.hero h1{
+
+    font-family:"Playfair Display",serif;
+
+    font-size:65px;
+
+    line-height:1;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.hero span{
+
+    background:
+    linear-gradient(
+        90deg,
+        #c4b5fd,
+        #8b5cf6
+    );
+
+    color:transparent;
+
+    -webkit-background-clip:text;
+
+}
+
+
+
+.hero p{
+
+    color:var(--muted);
+
+    font-size:18px;
+
+}
+
+
+
+
+
+.books{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+
+    gap:25px;
+
+}
+
+
+
+.card-link{
+
+    text-decoration: none;
+
+    color: inherit;
+
+    display: flex;
+
+    flex-direction: column;
+
+    flex: 1;
+
+}
+
+
+
+
+.card{
+
+    position:relative;
+
+    background:rgba(17,17,26,.8);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    transition:.3s;
+
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:var(--border-hover, rgba(167,139,250,.3));
+
+}
+
+
+
+.cover{
+
+    height:180px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    background:
+
+    linear-gradient(
+        145deg,
+        #25203d,
+        #08070e
+    );
+
+}
+
+
+
+.cover h2{
+
+    font-family:"Playfair Display",serif;
+
+    text-align:center;
+
+    font-size:22px;
+
+    line-height:1.3;
+
+    display:-webkit-box;
+
+    -webkit-line-clamp:3;
+
+    -webkit-box-orient:vertical;
+
+    overflow:hidden;
+
+}
+
+
+
+.info{
+
+    padding:18px;
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+.info h3{
+
+    margin-bottom:8px;
+
+    font-size:16px;
+
+    line-height:1.4;
+
+    display:-webkit-box;
+
+    -webkit-line-clamp:2;
+
+    -webkit-box-orient:vertical;
+
+    overflow:hidden;
+
+}
+
+
+
+.info p{
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+
+
+
+.price-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-top:auto;
+
+    padding-top:14px;
+
+    border-top:1px solid var(--border);
+
+    flex-wrap:nowrap;
+
+}
+
+
+
+.price{
+
+    font-family:"Playfair Display",serif;
+
+    font-size:19px;
+
+    font-weight:700;
+
+    font-variant-numeric: lining-nums tabular-nums;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    background:
+    linear-gradient(
+        90deg,
+        #c4b5fd,
+        #8b5cf6
+    );
+
+    color:transparent;
+
+    -webkit-background-clip:text;
+
+}
+
+
+
+.price-badge{
+
+    font-size:11px;
+
+    padding:5px 10px;
+
+    border-radius:20px;
+
+    background:rgba(167,139,250,.12);
+
+    color:var(--primary);
+
+    border:1px solid rgba(167,139,250,.25);
+
+}
+
+
+
+.edit-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+    white-space:nowrap;
+
+    flex-shrink:0;
+
+    padding:7px 14px;
+
+    border-radius:20px;
+
+    background:rgba(167,139,250,.12);
+
+    color:var(--primary);
+
+    border:1px solid rgba(167,139,250,.25);
+
+    text-decoration:none;
+
+    transition:.2s;
+
+}
+
+.edit-btn:hover{
+
+    background:rgba(167,139,250,.25);
+
+    border-color:rgba(167,139,250,.5);
+
+}
+
+
+
+.fav-form{
+
+    position:absolute;
+
+    top:12px;
+
+    right:12px;
+
+    z-index:5;
+
+    margin:0;
+
+}
+
+
+
+.fav-btn{
+
+    width:36px;
+
+    height:36px;
+
+    border-radius:50%;
+
+    border:1px solid var(--border);
+
+    background:rgba(9,9,15,.6);
+
+    backdrop-filter:blur(8px);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+
+
+.fav-btn:hover{
+
+    transform:scale(1.1);
+
+    border-color:rgba(167,139,250,.5);
+
+}
+
+
+
+
+
+.pagination{
+
+    margin-top:60px;
+
+    text-align:center;
+
+}
+
+
+
+.pagination a,
+.pagination span{
+
+    display:inline-block;
+
+    padding:10px 15px;
+
+    margin:5px;
+
+    border-radius:10px;
+
+    background:var(--card);
+
+    color:white;
+
+    text-decoration:none;
+
+}
+
+
+
+.current{
+
+    background:
+    linear-gradient(
+        135deg,
+        var(--primary),
+        var(--purple)
+    ) !important;
+
+}
+
+
+
+@media(max-width:1200px){
+
+.books{
+
+grid-template-columns:repeat(3,1fr);
+
+}
+
+}
+
+
+
+@media(max-width:700px){
+
+.books{
+
+grid-template-columns:1fr;
+
+}
+
+
+.hero h1{
+
+font-size:45px;
+
+}
+
+}
+
+
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+<div class="nav">
+
+
+<div class="logo">
+
+Book<span>ora</span>
+
+</div>
+
+
+<a class="home-btn" href="{% url 'welcom' %}">
+Back Home
+</a>
+
+
+</div>
+
+
+
+<div class="hero">
+
+<h1>
+Your favorite
+<span>books.</span>
+</h1>
+
+
+<p>
+All the titles you've marked as favorites, in one place.
+</p>
+
+
+</div>
+
+
+
+<div class="books">
+
+
+{% for book in page_obj %}
+
+
+<div class="card">
+
+<form method="post" action="{% url 'toggle_favorite' book.pk %}" class="fav-form">
+{% csrf_token %}
+<input type="hidden" name="next" value="{{ request.get_full_path }}">
+<button type="submit" class="fav-btn" title="Toggle favorite">
+{% if book.is_favorited %}❤️{% else %}🤍{% endif %}
+</button>
+</form>
+
+<a href="{% url 'book_detail' book.pk %}" class="card-link">
+
+<div class="cover">
+
+<h2>
+{{ book.title }}
+</h2>
+
+</div>
+
+
+
+<div class="info">
+
+
+<h3>
+{{ book.title }}
+</h3>
+
+
+<p>
+{{ book.author }}
+</p>
+
+</div>
+
+</a>
+
+<div class="price-row">
+
+{% if book.price %}
+<span class="price">${{ book.price }}</span>
+{% else %}
+<span class="price">Free</span>
+{% endif %}
+
+<a href="{% url 'book-edit' book.pk %}" class="edit-btn" title="Edit book">✎ Edit</a>
+
+</div>
+
+
+</div>
+
+
+{% empty %}
+
+
+<h2>
+No favorite books yet.
+</h2>
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+
+
+<div class="pagination">
+
+
+{% if page_obj.has_previous %}
+
+<a href="?page={{ page_obj.previous_page_number }}">
+Previous
+</a>
+
+{% endif %}
+
+
+
+<span class="current">
+
+{{ page_obj.number }}
+
+</span>
+
+
+
+{% if page_obj.has_next %}
+
+<a href="?page={{ page_obj.next_page_number }}">
+Next
+</a>
+
+{% endif %}
+
+
+
+</div>
+
+
+
+</body>
+
+</html>
