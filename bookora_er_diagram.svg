@@ -1,0 +1,115 @@
+<svg width="900" height="640" viewBox="0 0 900 640" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="crow-one" viewBox="0 0 20 20" refX="18" refY="10" markerWidth="16" markerHeight="16" orient="auto">
+      <path d="M4 4 L16 10 L4 16" fill="none" stroke="#5f5e5a" stroke-width="1.5"/>
+      <line x1="9" y1="2" x2="9" y2="18" stroke="#5f5e5a" stroke-width="1.5"/>
+    </marker>
+    <marker id="crow-many" viewBox="0 0 20 20" refX="18" refY="10" markerWidth="16" markerHeight="16" orient="auto">
+      <path d="M2 10 L18 2 M2 10 L18 10 M2 10 L18 18" fill="none" stroke="#5f5e5a" stroke-width="1.5"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="640" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#1f1f1c">Bookora — ER Diagram</text>
+
+  <!-- ================= USER table ================= -->
+  <g>
+    <rect x="60" y="90" width="220" height="140" rx="10" fill="#E6F1FB" stroke="#378ADD" stroke-width="1.5"/>
+    <rect x="60" y="90" width="220" height="34" rx="10" fill="#378ADD"/>
+    <rect x="60" y="108" width="220" height="16" fill="#378ADD"/>
+    <text x="170" y="113" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">USER</text>
+
+    <text x="76" y="147" font-size="13" fill="#042C53">id</text>
+    <text x="200" y="147" font-size="12" fill="#0C447C">PK · int</text>
+
+    <text x="76" y="170" font-size="13" fill="#042C53">username</text>
+    <text x="200" y="170" font-size="12" fill="#0C447C">string</text>
+
+    <text x="76" y="193" font-size="13" fill="#042C53">email</text>
+    <text x="200" y="193" font-size="12" fill="#0C447C">string</text>
+
+    <text x="76" y="216" font-size="13" fill="#042C53">password</text>
+    <text x="200" y="216" font-size="12" fill="#0C447C">string</text>
+  </g>
+
+  <!-- ================= BOOK table ================= -->
+  <g>
+    <rect x="620" y="60" width="220" height="200" rx="10" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1.5"/>
+    <rect x="620" y="60" width="220" height="34" rx="10" fill="#1D9E75"/>
+    <rect x="620" y="78" width="220" height="16" fill="#1D9E75"/>
+    <text x="730" y="83" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">BOOK</text>
+
+    <text x="636" y="117" font-size="13" fill="#04342C">id</text>
+    <text x="760" y="117" font-size="12" fill="#085041">PK · int</text>
+
+    <text x="636" y="140" font-size="13" fill="#04342C">title</text>
+    <text x="760" y="140" font-size="12" fill="#085041">string</text>
+
+    <text x="636" y="163" font-size="13" fill="#04342C">genre</text>
+    <text x="760" y="163" font-size="12" fill="#085041">string</text>
+
+    <text x="636" y="186" font-size="13" fill="#04342C">publish_date</text>
+    <text x="760" y="186" font-size="12" fill="#085041">date</text>
+
+    <text x="636" y="209" font-size="13" fill="#04342C">pages</text>
+    <text x="760" y="209" font-size="12" fill="#085041">int</text>
+
+    <text x="636" y="232" font-size="13" fill="#04342C">price</text>
+    <text x="760" y="232" font-size="12" fill="#085041">decimal</text>
+  </g>
+
+  <!-- ================= AUTHOR table ================= -->
+  <g>
+    <rect x="620" y="340" width="220" height="120" rx="10" fill="#FAECE7" stroke="#D85A30" stroke-width="1.5"/>
+    <rect x="620" y="340" width="220" height="34" rx="10" fill="#D85A30"/>
+    <rect x="620" y="358" width="220" height="16" fill="#D85A30"/>
+    <text x="730" y="363" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">AUTHOR</text>
+
+    <text x="636" y="397" font-size="13" fill="#4A1B0C">id</text>
+    <text x="760" y="397" font-size="12" fill="#712B13">PK · int</text>
+
+    <text x="636" y="420" font-size="13" fill="#4A1B0C">first_name</text>
+    <text x="760" y="420" font-size="12" fill="#712B13">string</text>
+
+    <text x="636" y="443" font-size="13" fill="#4A1B0C">last_name</text>
+    <text x="760" y="443" font-size="12" fill="#712B13">string</text>
+  </g>
+
+  <!-- ================= FAVORITE (junction) table ================= -->
+  <g>
+    <rect x="330" y="450" width="240" height="98" rx="10" fill="#F1EFE8" stroke="#888780" stroke-width="1.5"/>
+    <rect x="330" y="450" width="240" height="34" rx="10" fill="#888780"/>
+    <rect x="330" y="468" width="240" height="16" fill="#888780"/>
+    <text x="450" y="473" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">FAVORITE (favorited_by)</text>
+
+    <text x="346" y="507" font-size="13" fill="#2C2C2A">user_id</text>
+    <text x="490" y="507" font-size="12" fill="#444441">FK → USER.id</text>
+
+    <text x="346" y="530" font-size="13" fill="#2C2C2A">book_id</text>
+    <text x="490" y="530" font-size="12" fill="#444441">FK → BOOK.id</text>
+  </g>
+
+  <!-- Relationship: USER one to many FAVORITE -->
+  <path d="M280 200 C 320 200, 320 490, 328 494" fill="none" stroke="#5f5e5a" stroke-width="1.5" marker-start="url(#crow-one)" marker-end="url(#crow-many)"/>
+  <text x="300" y="345" font-size="12" fill="#5f5e5a">marks</text>
+
+  <!-- Relationship: BOOK one to many FAVORITE -->
+  <path d="M700 260 C 660 320, 580 420, 572 494" fill="none" stroke="#5f5e5a" stroke-width="1.5" marker-start="url(#crow-one)" marker-end="url(#crow-many)"/>
+  <text x="640" y="400" font-size="12" fill="#5f5e5a">marked by</text>
+
+  <!-- Relationship: BOOK many to many AUTHOR -->
+  <path d="M730 260 L 730 338" fill="none" stroke="#5f5e5a" stroke-width="1.5" marker-start="url(#crow-many)" marker-end="url(#crow-many)"/>
+  <text x="742" y="303" font-size="12" fill="#5f5e5a">written by</text>
+
+  <!-- Legend -->
+  <g font-size="12" fill="#5f5e5a">
+    <text x="60" y="600">Legend:</text>
+    <line x1="130" y1="596" x2="170" y2="596" stroke="#5f5e5a" stroke-width="1.5" marker-end="url(#crow-one)"/>
+    <text x="178" y="600">one</text>
+    <line x1="220" y1="596" x2="260" y2="596" stroke="#5f5e5a" stroke-width="1.5" marker-end="url(#crow-many)"/>
+    <text x="268" y="600">many</text>
+    <text x="330" y="600">PK = primary key · FK = foreign key</text>
+  </g>
+</svg>
